@@ -53,11 +53,10 @@ namespace UnityEditor.ShaderGraph
 
         public void GenerateNodeCode(ShaderGenerator visitor, GenerationMode generationMode)
         {
-			string texcoord = generationMode == GenerationMode.ForReals ? "IN.texcoord" : "float2(0,0)";            
 			var result = string.Format("{0}4 {1} = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, {2});"
                 , precision
 				, GetVariableNameForSlot(OutputSlotId)
-                , texcoord); //GetSlotValue(UVSlotId, generationMode));
+                , GetSlotValue(UVSlotId, generationMode));
 
             visitor.AddShaderChunk(result, true);
         }
